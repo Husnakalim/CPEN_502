@@ -9,6 +9,7 @@ public class NeuralNet implements NeuralNetInterface {
 	//size of Network; neurons and inputs
 	static int NUM_HIDDEN_NEURONS;
 	static int NUM_INPUTS;
+	static int NUM_OUTPUTS;
 	
 	
 	//Private variables
@@ -26,12 +27,22 @@ public class NeuralNet implements NeuralNetInterface {
 	//variables to store constants 
 	private int numHiddenNeurons = NUM_HIDDEN_NEURONS; /*Added to clean out code*/
 	private int numInputs = NUM_INPUTS;
+	private int numOutputs = NUM_OUTPUTS;
 	
 	//arrays to store inputs and weights
 	public double[] inputValues = new double[NUM_INPUTS];
 	public double[][] weights = new double[NUM_HIDDEN_NEURONS][NUM_INPUTS];
 	
 	
+	//delta arrays
+	public double[] deltaOutput = new double[numOutputs];
+	public double[] deltaHidden = new double[argNumHidden];
+	
+	//sum of product of weights and input, S
+	public double[] S = new double[argNumHidden]; 
+	
+	
+	///////////////////
 	//constructor
 	
 	/**
@@ -66,7 +77,7 @@ public class NeuralNet implements NeuralNetInterface {
 	
 	// standard sigmoid function
 	public double sigmoid(double x) {
-		return 2 / (1 + Math.exp(-x)) - 1;
+		return 2 / (1 + Math.exp(-x)) - 1; /*why 2?*/
 	}
 	
 	//custom sigmoid function
@@ -97,4 +108,13 @@ public class NeuralNet implements NeuralNetInterface {
 	}
 	
 
+}
+	public void forwardPropagation() {
+		
+		for (int i = 0; i < argNumHidden; i ++) {
+			for (int j = 0; i < argNumInputs; j ++) {
+				S[i] = S[i] + weights[i][j] * inputValues[i];
+			}
+		}S[i] = customSigmoid(S[i]); /*choose betweeen regular sigmoid and custom? */
+	}
 }
