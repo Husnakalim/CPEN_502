@@ -1,6 +1,10 @@
+package new_package;
 
 //imported utilities
+import java.io.File;
+import java.io.IOException;
 import java.util.Random;
+
 
 
 
@@ -10,6 +14,8 @@ public class NeuralNet implements NeuralNetInterface {
 	static int NUM_HIDDEN_NEURONS;
 	static int NUM_INPUTS;
 	static int NUM_OUTPUTS;
+	
+	//threshold constants
 	static int MAX_EPOCH = 100000;
 	static double MAX_ERROR = 0.05;
 	
@@ -40,8 +46,9 @@ public class NeuralNet implements NeuralNetInterface {
 	//delta arrays
 	public double[] deltaOutput = new double[numOutputs];
 	public double[] deltaHiddenOutput = new double[argNumHidden];
-	public double[] deltaWeightsHiddenIn = new double[NUM_INPUTS][NUM_HIDDEN_NEURONS];
-	public double[] deltaWeightsHiddenOut = new double[NUM_HIDDEN_NEURONS][NUM_OUTPUTS];
+	
+	public double[][] deltaWeightsHiddenIn = new double[NUM_INPUTS][NUM_HIDDEN_NEURONS];
+	public double[][] deltaWeightsHiddenOut = new double[NUM_HIDDEN_NEURONS][NUM_OUTPUTS];
 	
 	//sum of product of weights and input, S
 	public double[] hiddenS = new double[argNumHidden]; 
@@ -87,9 +94,9 @@ public class NeuralNet implements NeuralNetInterface {
 		
 	}
 	
-	// standard sigmoid function
-	public double sigmoid(double x) {
-		return 2 / (1 + Math.exp(-x)) - 1; /*why 2?*/
+	// standard bipolar sigmoid function
+	public double standard_sigmoid(double x) {
+		return 2 / (1 + Math.exp(-x)) - 1; /*why 2? bipolar*/
 	}
 	
 	//custom sigmoid function
@@ -112,6 +119,7 @@ public class NeuralNet implements NeuralNetInterface {
 				deltaWeightsHiddenIn[i][j] = 0.0;
 			}
 		}
+		
 		for (int i = 0; i < numOutputs; i++) {
 			for (int j = 0; j < numHiddenNeurons; j++) {
 				double r = new Random().nextDouble();
@@ -139,7 +147,7 @@ public class NeuralNet implements NeuralNetInterface {
 		}
 	}
 
-}
+
 	//one iteration of forward feed for one hidden layer
 	public void forwardPropagation() {
 		
@@ -147,9 +155,9 @@ public class NeuralNet implements NeuralNetInterface {
 		for (int i = 0; i < argNumHidden; i ++) {
 			hiddenS[i] = 0.0;
 			for (int j = 0; i < argNumInputs; j ++) {
-				hiddenS[i] = S[i] + weights[i][j] * inputValues[i];
+				hiddenS[i] = hiddenS[i] + weightsHiddenIn[i][j] * inputValues[i];
 			}
-			S[i] = customSigmoid(S[i]); /*choose betweeen regular sigmoid and custom? Consider RELU? */
+			hiddenS[i] = customSigmoid(hiddenS[i]); /*choose betweeen regular sigmoid and custom? Consider RELU? */
 		}
 		
 		//from hidden neurons and to output
@@ -163,7 +171,7 @@ public class NeuralNet implements NeuralNetInterface {
 		}
 	}
 	
-	public void backwardPropagation() {
+	public void backPropagation() {
 		
 		//calculating delta from output layer
 		for (int i = 0; i < numOutputs; i ++) {
@@ -174,7 +182,7 @@ public class NeuralNet implements NeuralNetInterface {
 		for (int j = 0; j < argNumHidden; j ++) {
 			
 			for (int k = 0; k < numOutputs; k ++) {
-				deltaHiddenOutput[j] = deltaHiddenOutput[j] + weigthsHiddenOut[j][k] * deltaOutput[k];
+				deltaHiddenOutput[j] = deltaHiddenOutput[j] + weightsHiddenOut[j][k] * deltaOutput[k];
 			}
 			double fPrime =  hiddenS[j] * (1 - hiddenS[j]);
 			deltaHiddenOutput[j] *= fPrime;
@@ -185,16 +193,16 @@ public class NeuralNet implements NeuralNetInterface {
 		for (int i = 0; i < numOutputs; i ++) {
 			
 			for (int j = 0; j < argNumHidden; j ++) {
-				weightsHiddenOut[j][i] = weightsHiddenOut[j][i] + argMomentumTerm * deltaWeightHiddenOut[j][i] + argLearningRate * deltaOut[i] * hiddenS[j];
+				weightsHiddenOut[j][i] = weightsHiddenOut[j][i] + argMomentumTerm * deltaWeightsHiddenOut[j][i] + argLearningRate * deltaOutput[i] * hiddenS[j];
 				deltaWeightsHiddenOut[j][i] = weightsHiddenOut[j][i] - tempWeights[j][i]; //CHECK THIS
 				
 			}
 		}
-		double[][] tempWeights = weightsHiddenIn.clone();
+		tempWeights = weightsHiddenIn.clone();
 		for (int j = 0; j < argNumHidden; j ++) {
 			
 			for (int i = 0; i < argNumInputs; i ++) {
-				weightsHiddenIn[i][j] = weightsHiddenIn[i][j] + argMomentumTerm * deltaWeightHiddenIn[i][j] + argLearningRate * deltaHiddenOutput[j] * inputValues[i];
+				weightsHiddenIn[i][j] = weightsHiddenIn[i][j] + argMomentumTerm * deltaWeightsHiddenIn[i][j] + argLearningRate * deltaHiddenOutput[j] * inputValues[i];
 				deltaWeightsHiddenIn[i][j] = weightsHiddenIn[i][j] - tempWeights[i][j]; //CHECK THIS
 				
 			}
@@ -202,20 +210,57 @@ public class NeuralNet implements NeuralNetInterface {
 		
 	}
 	public void train() {
-		double epoch = 0;
+		int epoch = 0;
 		double error = 10000;
 		
 		while (error > MAX_ERROR) {
 			forwardPropagation();
-			backwardPropagation();
+			backPropagation();
 			
 			for ( int i = 0; i < numOutputs; i ++) {
-				error = error + math.pow(C[i] - outputs[i],2);  //MAKE AS FUNCTION?
+				error = error + Math.pow(C[i] - outputs[i], 2);  //MAKE AS FUNCTION?
 			totalError[epoch] = error / 2;
 			}
 		epoch = epoch + 1;
 		}
-		
-		
 	}
-		
+	
+
+
+public static void main(String[] args) {
+	
+	
+	return;
+}
+
+@Override
+public double outputFor(double[] X) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+@Override
+public double train(double[] X, double argValue) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+
+@Override
+public void save(File argFile) {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public void load(String argFileName) throws IOException {
+	// TODO Auto-generated method stub
+	
+}
+
+@Override
+public double customSigmoid(double x) {
+	// TODO Auto-generated method stub
+	return 0;
+}
+}
+	
