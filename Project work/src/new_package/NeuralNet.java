@@ -95,12 +95,12 @@ public class NeuralNet implements NeuralNetInterface {
 	}
 	
 	// standard bipolar sigmoid function
-	public double standard_sigmoid(double x) {
+	public double sigmoid(double x) {
 		return 2 / (1 + Math.exp(-x)) - 1; /*why 2? bipolar*/
 	}
 	
 	//custom sigmoid function
-	public double sigmoid(double x) {
+	public double customSigmoid(double x) {
 		double a = argA;
 		double b = argB;
 		
@@ -257,10 +257,6 @@ public void load(String argFileName) throws IOException {
 	
 }
 
-@Override
-public double customSigmoid(double x) {
-	// TODO Auto-generated method stub
-	return 0;
-}
+
 }
 	
