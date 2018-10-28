@@ -11,26 +11,26 @@ import java.util.Random;
 public class NeuralNet implements NeuralNetInterface {
 	
 	//size of Network; neurons and inputs
-	static int NUM_HIDDEN_NEURONS;
-	static int NUM_INPUTS;
-	static int NUM_OUTPUTS;
+	static int NUM_HIDDEN_NEURONS = 16;
+	static int NUM_INPUTS = 16;
+	static int NUM_OUTPUTS = 1;
 	
 	//threshold constants
-	static int MAX_EPOCH = 100000;
+	static int MAX_EPOCH = 10000;
 	static double MAX_ERROR = 0.05;
 	
 	
 	//Private variables
-	private int argNumInputs;
-	private int argNumHidden;
-	private double argLearningRate;
-	private double argMomentumTerm;
-	private double argA;
-	private double argB;
+	private int argNumInputs = 3; // +1 for bias term
+	public int argNumHidden = 5; // +1 for bias term
+	private double argLearningRate = 0.2;
+	private double argMomentumTerm = 0.0;
+	private double argA = -0.5;
+	private double argB = 0.5;
 	
-	//varaibles for determining interval for random initialization of weights
-	private double minInitWeight;
-	private double maxInitWeight;
+	//variables for determining interval for random initialization of weights
+	private double minInitWeight = argA;
+	private double maxInitWeight = argB;
 	
 	//variables to store constants 
 	private int numHiddenNeurons = NUM_HIDDEN_NEURONS; /*Added to clean out code*/
@@ -38,27 +38,32 @@ public class NeuralNet implements NeuralNetInterface {
 	private int numOutputs = NUM_OUTPUTS;
 	
 	//arrays to store inputs and weights
-	public double[] inputValues = new double[NUM_INPUTS];
-	public double[][] weightsHiddenIn = new double[NUM_INPUTS][NUM_HIDDEN_NEURONS];
-	public double[][] weightsHiddenOut = new double[NUM_HIDDEN_NEURONS][NUM_OUTPUTS]; /*consider one 3d matrix for all weights to generalize*/
+	
+	public double[][] weightsHiddenIn = new double[argNumInputs][argNumHidden];
+	public double[][] weightsHiddenOut = new double[argNumHidden][numOutputs]; /*consider one 3d matrix for all weights to generalize*/
 	
 	
 	//delta arrays
 	public double[] deltaOutput = new double[numOutputs];
 	public double[] deltaHiddenOutput = new double[argNumHidden];
 	
-	public double[][] deltaWeightsHiddenIn = new double[NUM_INPUTS][NUM_HIDDEN_NEURONS];
-	public double[][] deltaWeightsHiddenOut = new double[NUM_HIDDEN_NEURONS][NUM_OUTPUTS];
+	public double[][] deltaWeightsHiddenIn = new double[argNumInputs][argNumHidden];
+	public double[][] deltaWeightsHiddenOut = new double[argNumHidden][numOutputs];
 	
 	//sum of product of weights and input, S
+	
 	public double[] hiddenS = new double[argNumHidden]; 
 	public double[] outputs = new double[numOutputs];
 	
 	//training set variables (true output)
-	public double[] C = new double[numOutputs]; //fix
+	public int numTrainingSets = 4; //SET THIS MANUALLY WHILE UNFINISHED CODE
+	public double[][] inputValues = new double[numTrainingSets][argNumInputs];
+	public double[] C = new double[numTrainingSets]; //fix
+	public int currTrainingSet = 0; 
 	
 	//error data
 	public double[] totalError = new double[MAX_EPOCH];
+	public double[] singleError = new double[MAX_EPOCH];
 	
 	
 	///////////////////
@@ -101,33 +106,36 @@ public class NeuralNet implements NeuralNetInterface {
 	
 	//custom sigmoid function
 	public double customSigmoid(double x) {
-		double a = argA;
-		double b = argB;
+		double a = 0;
+		double b = 1;
 		
-		return (b - a) / (1 + Math.exp(-x)) + a; /*Check this*/
+		return (b - a) / (1 + Math.pow(Math.E, -x)) + a; /*Check this*/
 	}
 	
 	
 	//initializing both weight sets to random values
 	public void initializeWeights() {
 		
-		for (int i = 0; i < numHiddenNeurons; i++) {
-			for (int j = 0; j < numInputs; j++) {
+		for (int i = 0; i < argNumInputs; i++) {
+			for (int j = 1; j < argNumHidden; j++) { //unchanged bias node
 				double r = new Random().nextDouble();
 				
 				weightsHiddenIn[i][j] = minInitWeight + (r * (maxInitWeight - minInitWeight));
+				//weightsHiddenIn[i][j] = Math.random() - 0.5;
 				deltaWeightsHiddenIn[i][j] = 0.0;
 			}
 		}
 		
-		for (int i = 0; i < numOutputs; i++) {
-			for (int j = 0; j < numHiddenNeurons; j++) {
+		for (int i = 0; i < argNumHidden; i++) {
+			for (int j = 0; j < numOutputs; j++) {
 				double r = new Random().nextDouble();
 				
 				weightsHiddenOut[i][j] = minInitWeight + (r * (maxInitWeight - minInitWeight));
+				//weightsHiddenOut[i][j] = Math.random() - 0.5;
 				deltaWeightsHiddenOut[i][j] = 0.0;
 			}
 		}
+		
 	}
 	
 	//initializing both weight sets to zero
@@ -151,11 +159,11 @@ public class NeuralNet implements NeuralNetInterface {
 	//one iteration of forward feed for one hidden layer
 	public void forwardPropagation() {
 		
-		//from input and to hidden neuron
-		for (int i = 0; i < argNumHidden; i ++) {
+		for (int i = 1; i < argNumHidden; i ++) { //from 1 to prevent changing bias node
 			hiddenS[i] = 0.0;
-			for (int j = 0; i < argNumInputs; j ++) {
-				hiddenS[i] = hiddenS[i] + weightsHiddenIn[i][j] * inputValues[i];
+			
+			for (int j = 0; j < argNumInputs; j ++) {
+				hiddenS[i] = hiddenS[i] + weightsHiddenIn[j][i] * inputValues[currTrainingSet][j];
 			}
 			hiddenS[i] = customSigmoid(hiddenS[i]); /*choose betweeen regular sigmoid and custom? Consider RELU? */
 		}
@@ -163,71 +171,126 @@ public class NeuralNet implements NeuralNetInterface {
 		//from hidden neurons and to output
 		for (int k = 0; k < numOutputs; k ++) {
 			outputs[k] = 0.0;
-			for (int l = 0; k < argNumHidden; l ++) {
-				outputs[k] = outputs[k] + weightsHiddenOut[k][l] * hiddenS[k];
+			for (int l = 0; l < argNumHidden; l ++) {
+				outputs[k] = outputs[k] + weightsHiddenOut[l][k] * hiddenS[l];
 	}
 			outputs[k] = customSigmoid(outputs[k]);
 	
 		}
+		
+		singleError[0] = C[currTrainingSet] - outputs[0];
+		//System.out.println(singleError[0]);
 	}
 	
 	public void backPropagation() {
 		
 		//calculating delta from output layer
 		for (int i = 0; i < numOutputs; i ++) {
-			deltaOutput[i] = (C[i] - outputs[i]) * outputs[i] * (1 - outputs[i]);
+			//deltaOutput[i] = 0;
+			deltaOutput[i] = singleError[i] * outputs[i] * (1 - outputs[i]); //sat manual num of training set
 			
 		}
+		//updating weights from hidden to output
+				//double[][] tempWeights = weightsHiddenOut.clone();
+				for (int i = 0; i < numOutputs; i ++) {
+					
+					for (int j = 0; j < argNumHidden; j ++) {
+						//weightsHiddenOut[j][i] = weightsHiddenOut[j][i] + argMomentumTerm * deltaWeightsHiddenOut[j][i] + argLearningRate * deltaOutput[i] * hiddenS[j];
+						//deltaWeightsHiddenOut[j][i] = weightsHiddenOut[j][i] - tempWeights[j][i]; //CHECK THIS
+						deltaWeightsHiddenOut[j][i] = argMomentumTerm * deltaWeightsHiddenOut[j][i] + argLearningRate * deltaOutput[i];
+						weightsHiddenOut[j][i] = weightsHiddenOut[j][i] + deltaWeightsHiddenOut[j][i];
+					}
+				}
+		
 		//calculating delta from hidden layer
 		for (int j = 0; j < argNumHidden; j ++) {
-			
+			deltaHiddenOutput[j] = 0;
 			for (int k = 0; k < numOutputs; k ++) {
 				deltaHiddenOutput[j] = deltaHiddenOutput[j] + weightsHiddenOut[j][k] * deltaOutput[k];
 			}
 			double fPrime =  hiddenS[j] * (1 - hiddenS[j]);
-			deltaHiddenOutput[j] *= fPrime;
+			deltaHiddenOutput[j] = deltaHiddenOutput[j] * fPrime;
 		}
 		
-		//updating weights
-		double[][] tempWeights = weightsHiddenOut.clone();
-		for (int i = 0; i < numOutputs; i ++) {
+		
+		//tempWeights = weightsHiddenIn.clone();
+		for (int j = 1; j < argNumHidden; j ++) { //bias node unchanged
 			
-			for (int j = 0; j < argNumHidden; j ++) {
-				weightsHiddenOut[j][i] = weightsHiddenOut[j][i] + argMomentumTerm * deltaWeightsHiddenOut[j][i] + argLearningRate * deltaOutput[i] * hiddenS[j];
-				deltaWeightsHiddenOut[j][i] = weightsHiddenOut[j][i] - tempWeights[j][i]; //CHECK THIS
-				
+			for (int i = 0; i < argNumInputs; i ++) { //sat num of training set manually
+				//weightsHiddenIn[i][j] = weightsHiddenIn[i][j] + argMomentumTerm * deltaWeightsHiddenIn[i][j] + argLearningRate * deltaHiddenOutput[j] * inputValues[0][i];
+				//deltaWeightsHiddenIn[i][j] = weightsHiddenIn[i][j] - tempWeights[i][j]; //CHECK THIS
+				deltaWeightsHiddenIn[i][j] = argMomentumTerm * deltaWeightsHiddenIn[i][j] + argLearningRate * deltaHiddenOutput[j] * inputValues[currTrainingSet][i];
+				weightsHiddenIn[i][j] = weightsHiddenIn[i][j] + deltaWeightsHiddenIn[i][j];
 			}
 		}
-		tempWeights = weightsHiddenIn.clone();
-		for (int j = 0; j < argNumHidden; j ++) {
-			
-			for (int i = 0; i < argNumInputs; i ++) {
-				weightsHiddenIn[i][j] = weightsHiddenIn[i][j] + argMomentumTerm * deltaWeightsHiddenIn[i][j] + argLearningRate * deltaHiddenOutput[j] * inputValues[i];
-				deltaWeightsHiddenIn[i][j] = weightsHiddenIn[i][j] - tempWeights[i][j]; //CHECK THIS
-				
-			}
-		}
+		//update to new training set
+		currTrainingSet = (currTrainingSet + 1) % numTrainingSets;
 		
 	}
-	public void train() {
+	public double train() {
 		int epoch = 0;
-		double error = 10000;
 		
-		while (error > MAX_ERROR) {
-			forwardPropagation();
-			backPropagation();
+		totalError[0] = 10;
+		while (totalError[0] > MAX_ERROR) {
+			totalError[0] = 0;
+			currTrainingSet = 0;
 			
-			for ( int i = 0; i < numOutputs; i ++) {
-				error = error + Math.pow(C[i] - outputs[i], 2);  //MAKE AS FUNCTION?
-			totalError[epoch] = error / 2;
+			for (int i = 0; i < numTrainingSets; i ++) {
+				forwardPropagation();
+				backPropagation();
+				
+				totalError[0] = totalError[0] + Math.pow(singleError[0], 2);
+				
+				
 			}
+		totalError[0] = totalError[0] / 2;
 		epoch = epoch + 1;
+		System.out.println(totalError[0]);
 		}
+		System.out.print("heI");
+		return epoch;
 	}
 	
+	public void initializeTrainingSet() {
+		double bias = 1;
+		//for (int i = 0; i < )
+		C[0] = 0;
+		C[1] = 1;
+		C[2] = 1;
+		C[3] = 0;
+		
+		inputValues[0][0] = bias;
+		inputValues[0][1] = 0;
+		inputValues[0][2] = 0;
+		
+		inputValues[1][0] = bias;
+		inputValues[1][1] = 0;
+		inputValues[1][2] = 1;
+		
+		inputValues[2][0] = bias;
+		inputValues[2][1] = 1;
+		inputValues[2][2] = 0;
+		
+		inputValues[3][0] = bias;
+		inputValues[3][1] = 1;
+		inputValues[3][2] = 1;
+		
+		hiddenS[0] = bias;
+	}
 
 
 public static void main(String[] args) {
+	int NumInputs = 2;
+	int NumHidden = 4;
+	double LearningRate = 0.2;
+	double MomentumTerm = 0.0;
+	double A = -0.5;
+	double B = 0.5;
+	
+	NeuralNet XOR = new NeuralNet(NumInputs, NumHidden, LearningRate, MomentumTerm, A, B);
+	XOR.initializeWeights();
+	XOR.initializeTrainingSet();
+	XOR.train();
 	
 	
 	return;
@@ -259,4 +322,3 @@ public void load(String argFileName) throws IOException {
 
 
 }
-	
