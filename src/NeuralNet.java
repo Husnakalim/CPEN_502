@@ -291,22 +291,22 @@ public class NeuralNet {
 
         }
         else if (!binary){
-            testOutput[0][0] = 0;
+            testOutput[0][0] = -1;
             testOutput[1][0] = 1;
             testOutput[2][0] = 1;
-            testOutput[3][0] = 0;
+            testOutput[3][0] = -1;
 
             inputValues[0][0] = bias;
-            inputValues[0][1] = 0;
-            inputValues[0][2] = 0;
+            inputValues[0][1] = -1;
+            inputValues[0][2] = -1;
 
             inputValues[1][0] = bias;
-            inputValues[1][1] = 0;
+            inputValues[1][1] = -1;
             inputValues[1][2] = 1;
 
             inputValues[2][0] = bias;
             inputValues[2][1] = 1;
-            inputValues[2][2] = 0;
+            inputValues[2][2] = -1;
 
             inputValues[3][0] = bias;
             inputValues[3][1] = 1;
