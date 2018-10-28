@@ -45,19 +45,19 @@ public class NeuralNet {
     static double argA = -0.5;
     static double argB = 0.5;
 
-    static double [][] inputValues      = new double[numTrainingSet][numInputs];
-    static double [][] testOutput = new double[numTrainingSet][numOutputs];
-    static double []   hiddenS     = new double[numHidden];
-    static double []   outputS     = new double[numOutputs];
-    static double [] singleError = new double[numOutputs];
-    static double []   totalError  = new double[numOutputs];
+    double [][] inputValues      = new double[numTrainingSet][numInputs];
+    double [][] testOutput = new double[numTrainingSet][numOutputs];
+    double []   hiddenS     = new double[numHidden];
+    double []   outputS     = new double[numOutputs];
+    double [] singleError = new double[numOutputs];
+    double []   totalError  = new double[numOutputs];
 
-    static double [][] weightInputToHidden = new double[numInputs][numHidden];
-    static double [][] WeightHiddenToOutput = new double[numHidden][numOutputs];
-    static double [][] deltaWeightHiddenInput = new double[numInputs][numHidden];
-    static double [][] deltaWeightHiddenOutput = new double[numHidden][numOutputs];
-    static double [] deltaOutputS = new double[numOutputs];
-    static double [] deltaHiddenS = new double[numHidden];
+    double [][] weightInputToHidden = new double[numInputs][numHidden];
+    double [][] WeightHiddenToOutput = new double[numHidden][numOutputs];
+    double [][] deltaWeightHiddenInput = new double[numInputs][numHidden];
+    double [][] deltaWeightHiddenOutput = new double[numHidden][numOutputs];
+    double [] deltaOutputS = new double[numOutputs];
+    double [] deltaHiddenS = new double[numHidden];
 
 
     //static List<double[][]> errorList = new ArrayList<double[][]>();
