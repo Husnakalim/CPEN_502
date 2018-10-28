@@ -22,7 +22,7 @@ class ReturnValues {
 public class NeuralNet {
 
     //Choose the type of sigmoid function
-    static boolean binary = false;            //true for binary training set, false for bipolar training set
+    static boolean binary = true;            //true for binary training set, false for bipolar training set
 
 
     //hyperparameters for the neural network
@@ -78,8 +78,6 @@ public class NeuralNet {
         //repeated training of neural networks
         int numberOfNetworks = 10;
 
-        //List<List> results = new ArrayList<List>();
-        //List<int[]> epochList = new ArrayList<int[]>();
 
         double[][] results = new double[numberOfNetworks][MAX_EPOCH];
         double[] epochList = new double[numberOfNetworks];
@@ -94,8 +92,6 @@ public class NeuralNet {
 
             ReturnValues r = XOR.train();
 
-            //results.add(errorList);
-            //epochList.add(epoch);
 
             results[i] = r.errorList;
             epochList[i] = r.epoch;
@@ -108,6 +104,37 @@ public class NeuralNet {
         catch(IOException e) {
             e.printStackTrace();
         }
+
+        //averaging several simulations
+
+        int numberOfSimul = 1000;
+        int[] epochListForAvg = new int[numberOfSimul];
+        for (int i = 0; i < numberOfSimul; i ++){
+            NeuralNet XOR = new NeuralNet();
+            XOR.initializeWeights();
+            XOR.initializeTrainingSet();
+
+            //Training process
+
+            ReturnValues r = XOR.train();
+
+
+
+            epochListForAvg[i] = r.epoch;
+
+
+        }
+        //averaging
+
+        double sum = 0;
+        double avg;
+        for (int i = 0; i < numberOfSimul; i ++){
+            sum = sum + epochListForAvg[i];
+        }
+        avg = sum / numberOfSimul;
+
+        System.out.println("Average of " + numberOfSimul + " simulations: " + avg);
+
 
 
     }
@@ -134,7 +161,7 @@ public class NeuralNet {
 
             for(int k = 0; k < numOutputs; k++){
                 totalError[k] /= 2;
-                System.out.println("Total error for output number " + (k + 1) + ": " + totalError[k]);
+                //System.out.println("Total error for output number " + (k + 1) + ": " + totalError[k]);
             }
             //errorList.add(totalError);
             errorList[epoch] = totalError[0]; //hardcode
@@ -143,7 +170,7 @@ public class NeuralNet {
             epoch = epoch + 1;
         } while(totalError[0] > totalErrorThreshold & epoch < MAX_EPOCH);
 
-        System.out.println("Number of epochs until error threshold reached: " + epoch);
+        //System.out.println("Number of epochs until error threshold reached: " + epoch);
 
         ReturnValues R = new ReturnValues(errorList, epoch);
         return R;
@@ -330,7 +357,7 @@ public class NeuralNet {
         for (int i = 0; i < MAX_EPOCH; i ++){
 
             for (int j = 0; j < list.length; j ++) {
-                pw.printf(Double.toString(matrix[j][i])+ ',');
+                pw.printf(Double.toString(matrix[j][i]) + ',');
                 //if (matrix[j][i] != 0.0){
                 //  pw.printf(Double.toString(matrix[j][i])+ ',');
                 //}
