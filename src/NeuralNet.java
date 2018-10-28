@@ -1,4 +1,4 @@
-//package HomeworkOne;
+
 
 //import java.math.*;
 import java.io.IOException;
@@ -7,9 +7,7 @@ import java.io.PrintWriter;
 import java.io.File;
 import java.util.*;
 
-//import HomeworkTwo.RobotAction;
-//import HomeworkTwo.RobotState;
-//import robocode.RobocodeFileOutputStream;
+
 
 class ReturnValues {
 
