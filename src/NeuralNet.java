@@ -22,13 +22,13 @@ class ReturnValues {
 public class NeuralNet {
 
     //Choose the type of sigmoid function
-    static boolean binary = true;            //true for binary training set, false for bipolar training set
+    static boolean binary = false;            //true for binary training set, false for bipolar training set
 
 
     //hyperparameters for the neural network
     static int numHidden = 5;                  //Number of hidden neurons in network
     static double learningRate = 0.2;         //Controlling learning speed
-    static double momentumTerm = 0.0;           //Controlling training time
+    static double momentumTerm = 0.9;           //Controlling training time
     static double bias = 1;                     //Fixed bias parameter
 
     //Constant parameters
@@ -277,7 +277,7 @@ public class NeuralNet {
 
         //setting bounds to bipolar case
         double upperBound = 1;
-        double lowerBound = -1;
+        double lowerBound = - 1;
 
         //The bounds for binary inputs
         if(binary){
