@@ -46,7 +46,7 @@ for i in range(10):
 plt.show()
 """
 
-plt.title(r'Plot 3: Total error versus number of epochs for binary XOR with $\alpha = 0.9$')
+plt.title(r'Plot 2: Total error versus number of epochs for binary XOR')
 
 i = 0
 while i < 10:
@@ -60,10 +60,6 @@ while i < 10:
 plt.ylabel('Total Error')
 plt.xlabel('Number of Epochs')
 plt.legend()
-
 plt.savefig('TotErrVsEpoch_bipolar.pdf')
-plt.show()
-
-plt.savefig('TotErrVsEpoch_binaryMomentum.pdf')
 plt.show()
 
