@@ -9,42 +9,11 @@ start_epoch = 10
 with open(filename) as textFile:
         lines = [line.split(",") for line in textFile]
 
-"""
-with open(filename) as textFile:
-        data = [[float(value) for value in line.split(",")] for line in textFile]
-"""
-
 data = np.asarray(lines)
 data = data[:, 0:-1]
 data = data.astype(float)
 
-<<<<<<< HEAD
-epoch = np.arange(1, 4340, 1)
-=======
 epoch = np.arange(1, range, 1)
-
-"""
-plt.figure(1)
-plt.title("Number of epochs versus error")
-plt.plot(epoch, data[start_epoch : start_epoch + range - 1, net_nr])
-#plt.(label)
-plt.show(1)
->>>>>>> 2c333ccb63281d34a473e135ac4dc574c1d370b0
-
-
-<<<<<<< HEAD
-for i in range(0,9):
-    plt.plot(epoch, data[11:4350, i])
-=======
-#plt.figure(2)
-for i in range(10):
-        epoch_l = data[0, i]
-        epoch = np.arange(1, epoch_l, 1)
-        plt.plot(epoch, data[:, i])
-
->>>>>>> 2c333ccb63281d34a473e135ac4dc574c1d370b0
-plt.show()
-"""
 
 plt.title('Total error versus number of epochs')
 i = 0
