@@ -47,17 +47,17 @@ plt.show()
 """
 
 plt.title('Total error versus number of epochs')
-i = 1
+i = 0
 while i < 10:
         epoch_l = data[0, i]
         epoch_l = epoch_l.astype(int)
         epoch = np.arange(1, epoch_l, 1)
-        plt.plot(epoch, data[1:epoch_l, i], label = 'Trial' + str(i))
+        plt.plot(epoch, data[1:epoch_l, i], label = 'Trial' + str(i + 1))
 
         i += 1
 
 plt.ylabel('Total Error')
 plt.xlabel('Number of Epochs')
 plt.legend()
-plt.savefig('')
+plt.savefig('TotErrVsEpoch_bipolar.pdf')
 plt.show()
