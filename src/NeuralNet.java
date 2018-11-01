@@ -58,10 +58,6 @@ public class NeuralNet {
     double [] deltaHiddenS = new double[numHidden];
 
 
-    //static List<double[][]> errorList = new ArrayList<double[][]>();
-    //static double[] errorList = new double[MAX_EPOCH];
-
-
     //Main function
 
     public static void main(String[] args)
