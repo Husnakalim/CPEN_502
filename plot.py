@@ -15,9 +15,10 @@ data = np.asarray(lines)
 data = data[:, 0:-1]
 data = data.astype(float)
 
-epoch = np.arange(1, 730, 1)
+epoch = np.arange(1, 4340, 1)
 
 print(data[1:, 8])
 
-plt.plot(epoch, data[21:750, 8])
+for i in range(0,9):
+    plt.plot(epoch, data[11:4350, i])
 plt.show()
