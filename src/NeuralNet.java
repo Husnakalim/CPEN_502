@@ -22,7 +22,7 @@ class ReturnValues {
 public class NeuralNet {
 
     //Choose the type of sigmoid function
-    static boolean binary = false;            //true for binary training set, false for bipolar training set
+    static boolean binary = true;            //true for binary training set, false for bipolar training set
 
 
     //hyperparameters for the neural network
