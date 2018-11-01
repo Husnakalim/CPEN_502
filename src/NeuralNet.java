@@ -28,7 +28,7 @@ public class NeuralNet {
     //hyperparameters for the neural network
     static int numHidden = 5;                  //Number of hidden neurons in network
     static double learningRate = 0.2;         //Controlling learning speed
-    static double momentumTerm = 0.0;           //Controlling training time
+    static double momentumTerm = 0.9;           //Controlling training time
     static double bias = 1;                     //Fixed bias parameter
 
     //Constant parameters

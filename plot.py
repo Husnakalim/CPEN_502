@@ -50,5 +50,5 @@ while i < 10:
 plt.ylabel('Total Error')
 plt.xlabel('Number of Epochs')
 plt.legend()
-plt.savefig('TotErrVsEpoch_bipolar.pdf')
+plt.savefig('TotErrVsEpoch_bipolarMomentum.pdf')
 plt.show()
