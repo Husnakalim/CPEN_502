@@ -58,10 +58,6 @@ public class NeuralNet {
     double [] deltaHiddenS = new double[numHidden];
 
 
-    //static List<double[][]> errorList = new ArrayList<double[][]>();
-    //static double[] errorList = new double[MAX_EPOCH];
-
-
     //Main function
 
     public static void main(String[] args)
@@ -277,7 +273,7 @@ public class NeuralNet {
 
         //setting bounds to bipolar case
         double upperBound = 1;
-        double lowerBound = -1;
+        double lowerBound = - 1;
 
         //The bounds for binary inputs
         if(binary){
