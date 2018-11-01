@@ -2,8 +2,28 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="2deec07f-525f-489e-8264-63b427eb3e6a" name="Default Changelist" comment="">
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/errortest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/errortest.txt" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/NeuralNet.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NeuralNet.java" afterDir="false" />
+=======
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/.idea/.name" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.name" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TotErrVsEpoch_bipolar.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/TotErrVsEpoch_bipolar.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/New_project_folder/CommonInterface.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/New_project_folder/NeuralNet.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/New_project_folder/NeuralNetInterface.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/New_project_folder/NeuralNetInterface.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/New_project_folder/ReturnValues.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/New_project_folder/ReturnValues.class" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TotErrVsEpoch_binary.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/TotErrVsEpoch_binary.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TotErrVsEpoch_bipolar.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/TotErrVsEpoch_bipolar.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/TotErrVsEpoch_bipolarMomentum.pdf" beforeDir="false" afterPath="$PROJECT_DIR$/TotErrVsEpoch_bipolarMomentum.pdf" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/errortest.txt" beforeDir="false" afterPath="$PROJECT_DIR$/errortest.txt" afterDir="false" />
+>>>>>>> a01a56b36064b8390ed1801668733a72021c4ad9
+      <change beforePath="$PROJECT_DIR$/plot.py" beforeDir="false" afterPath="$PROJECT_DIR$/plot.py" afterDir="false" />
+>>>>>>> 40d82bf6137035986ab1857c606778be1bdb5f4c
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,14 +66,42 @@
         </counts>
       </usages-collector>
     </session>
+    <session id="266174547">
+      <usages-collector id="statistics.lifecycle.project">
+        <counts>
+          <entry key="project.closed" value="1" />
+          <entry key="project.open.time.7" value="1" />
+          <entry key="project.opened" value="1" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.extensions.open">
+        <counts>
+          <entry key="class" value="2" />
+        </counts>
+      </usages-collector>
+      <usages-collector id="statistics.file.types.open">
+        <counts>
+          <entry key="CLASS" value="2" />
+        </counts>
+      </usages-collector>
+    </session>
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/NeuralNet.java">
           <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
             <state relative-caret-position="219">
               <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+=======
+<<<<<<< HEAD
+            <state relative-caret-position="128">
+              <caret line="348" column="14" selection-start-line="348" selection-start-column="14" selection-end-line="348" selection-end-column="14" />
+=======
+            <state relative-caret-position="183">
+              <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+>>>>>>> 40d82bf6137035986ab1857c606778be1bdb5f4c
             </state>
           </provider>
         </entry>
@@ -63,6 +111,7 @@
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="45">
               <caret line="4" column="27" selection-start-line="4" selection-start-column="27" selection-end-line="4" selection-end-column="27" />
+>>>>>>> a01a56b36064b8390ed1801668733a72021c4ad9
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -70,6 +119,8 @@
           </provider>
         </entry>
       </file>
+<<<<<<< HEAD
+=======
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/NeuralNetInterface.java">
           <provider selected="true" editor-type-id="text-editor">
@@ -79,6 +130,7 @@
           </provider>
         </entry>
       </file>
+>>>>>>> a01a56b36064b8390ed1801668733a72021c4ad9
     </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
@@ -102,7 +154,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="20" />
     <option name="y" value="43" />
     <option name="width" value="1400" />
@@ -113,28 +165,42 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="PackagesPane" />
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
             <path>
-              <item name="New_project_folder" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CPEN502" type="b2602c69:ProjectViewProjectNode" />
               <item name="CPEN-502" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
-              <item name="New_project_folder" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CPEN502" type="b2602c69:ProjectViewProjectNode" />
               <item name="CPEN-502" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="CPEN502" type="b2602c69:ProjectViewProjectNode" />
+              <item name="CPEN-502" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="NeuralNet.java" type="529ef68f:ClassesTreeStructureProvider$PsiClassOwnerTreeNode" />
             </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
+<<<<<<< HEAD
+    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541034395337" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.15" />
+    <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="project.propCompiler" />
+=======
     <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1541040089577" />
+>>>>>>> a01a56b36064b8390ed1801668733a72021c4ad9
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -176,10 +242,13 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="20" y="43" width="1400" height="837" extended-state="0" />
-    <editor active="true" />
+    <frame x="0" y="23" width="1280" height="777" extended-state="6" />
     <layout>
+<<<<<<< HEAD
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.15347335" />
+=======
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1539028" />
+>>>>>>> a01a56b36064b8390ed1801668733a72021c4ad9
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -188,7 +257,7 @@
       <window_info id="Favorites" order="6" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.36644295" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.32885906" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32885906" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -196,7 +265,11 @@
       <window_info anchor="bottom" id="Terminal" order="7" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
       <window_info anchor="bottom" id="Version Control" order="9" />
+<<<<<<< HEAD
+      <window_info active="true" anchor="bottom" id="Messages" order="10" visible="true" weight="0.32846716" />
+=======
       <window_info anchor="bottom" id="Messages" order="10" weight="0.32885906" />
+>>>>>>> a01a56b36064b8390ed1801668733a72021c4ad9
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -212,20 +285,39 @@
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/NeuralNet.java" />
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/Project work/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi" />
+    <entry file="file://$PROJECT_DIR$/errortest.txt">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/ReturnValues.class">
+      <provider selected="true" editor-type-id="text-editor" />
+=======
     <entry file="file://$PROJECT_DIR$/Project work/.metadata/.plugins/org.eclipse.e4.workbench/workbench.xmi">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="3236">
           <caret line="223" column="185" selection-start-line="223" selection-start-column="185" selection-end-line="223" selection-end-column="185" />
         </state>
       </provider>
+>>>>>>> a01a56b36064b8390ed1801668733a72021c4ad9
     </entry>
     <entry file="file://$PROJECT_DIR$/errortest.txt">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
     <entry file="file://$PROJECT_DIR$/src/NeuralNet.java">
       <provider selected="true" editor-type-id="text-editor">
+<<<<<<< HEAD
         <state relative-caret-position="219">
           <caret line="29" column="36" selection-start-line="29" selection-start-column="36" selection-end-line="29" selection-end-column="36" />
+=======
+<<<<<<< HEAD
+        <state>
+          <caret column="2" selection-start-column="2" selection-end-column="2" />
+=======
+        <state relative-caret-position="183">
+          <caret line="24" column="32" selection-start-line="24" selection-start-column="32" selection-end-line="24" selection-end-column="32" />
+>>>>>>> a01a56b36064b8390ed1801668733a72021c4ad9
+>>>>>>> 40d82bf6137035986ab1857c606778be1bdb5f4c
         </state>
       </provider>
     </entry>
@@ -239,12 +331,104 @@
         </state>
       </provider>
     </entry>
+<<<<<<< HEAD
+    <entry file="file://$PROJECT_DIR$/src/NeuralNet.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="37" column="6" lean-forward="true" selection-start-line="37" selection-start-column="6" selection-end-line="37" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/NeuralNet.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="128">
+          <caret line="348" column="14" selection-start-line="348" selection-start-column="14" selection-end-line="348" selection-end-column="14" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+=======
     <entry file="file://$PROJECT_DIR$/src/NeuralNetInterface.java">
       <provider selected="true" editor-type-id="text-editor">
         <state>
           <caret column="2" selection-start-column="2" selection-end-column="2" />
+>>>>>>> a01a56b36064b8390ed1801668733a72021c4ad9
         </state>
       </provider>
     </entry>
+  </component>
+  <component name="masterDetails">
+    <states>
+      <state key="ArtifactsStructureConfigurable.UI">
+        <settings>
+          <artifact-editor />
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="FacetStructureConfigurable.UI">
+        <settings>
+          <last-edited>No facets are configured</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="GlobalLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="JdkListConfigurable.UI">
+        <settings>
+          <last-edited>11</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ModuleStructureConfigurable.UI">
+        <settings>
+          <last-edited>New_project_folder</last-edited>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+                <option value="0.6" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+      <state key="ProjectLibrariesConfigurable.UI">
+        <settings>
+          <splitter-proportions>
+            <option name="proportions">
+              <list>
+                <option value="0.2" />
+              </list>
+            </option>
+          </splitter-proportions>
+        </settings>
+      </state>
+    </states>
   </component>
 </project>

@@ -9,14 +9,14 @@ start_epoch = 10
 with open(filename) as textFile:
         lines = [line.split(",") for line in textFile]
 
-"""
-with open(filename) as textFile:
-        data = [[float(value) for value in line.split(",")] for line in textFile]
-"""
-
 data = np.asarray(lines)
 data = data[:, 0:-1]
 data = data.astype(float)
+
+
+epoch = np.arange(1, range, 1)
+
+plt.title('Total error versus number of epochs')
 
 
 epoch = np.arange(1, 4340, 1)
@@ -47,6 +47,7 @@ plt.show()
 """
 
 plt.title(r'Plot 3: Total error versus number of epochs for binary XOR with $\alpha = 0.9$')
+
 i = 0
 while i < 10:
         epoch_l = data[0, i]
@@ -59,5 +60,10 @@ while i < 10:
 plt.ylabel('Total Error')
 plt.xlabel('Number of Epochs')
 plt.legend()
+
+plt.savefig('TotErrVsEpoch_bipolar.pdf')
+plt.show()
+
 plt.savefig('TotErrVsEpoch_binaryMomentum.pdf')
 plt.show()
+
