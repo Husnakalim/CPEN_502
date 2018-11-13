@@ -23,6 +23,9 @@ public class NNBot extends AdvancedRobot{
         //set colors of robot
         setColors(Color.red, Color.yellow, Color.pink);
 
+        //independent moving of gun and radar
+        setAdjustGunForRobotTurn(true);
+        setAdjustRadarForGunTurn(true);
 
 
 
@@ -30,6 +33,9 @@ public class NNBot extends AdvancedRobot{
         while(true){
             robotMovement();
             radarMovement();
+            gunMovement();
+
+            execute();
 
         }
     }
@@ -104,7 +110,8 @@ public class NNBot extends AdvancedRobot{
         //Turn the radar
         setTurnRadarRightRadians(radarTurn);
 
-        // ...
+        //Fire operations
+
     }
     /*public void radarMovement(){
         double threshhold = 0.5;
@@ -118,6 +125,16 @@ public class NNBot extends AdvancedRobot{
 
     }*/
 
+    public void gunMovement(){
+
+    }
+
+
+
+    //action on events
+    public void onHitWall(HitWallEvent e){
+        reward += -2; //decrement reward by some value
+    }
 
     int getState(){
 
