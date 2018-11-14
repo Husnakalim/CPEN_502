@@ -8,18 +8,18 @@ public class RobotActions {
     public static final int backTurnLeft = 4;
     public static final int backTurnRight = 5;
 
-    RobotActions(double moveDistance, int numActions){
-        this.moveDistance = moveDistance;
-        this.numActions = numActions;
-    }
+    //RobotActions(double moveDistance, int numActions){
+     //   this.moveDistance = moveDistance;
+     //   this.numActions = numActions;
+    //}
 
 
 
     //variables defining what to do when action called i.e. distance
-    double moveDistance;
+    public static final double moveDistance = 100; //set manually for now
 
     //total number of move-actions
-    int numActions;
+    //int numActions;
 
 
 }

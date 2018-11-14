@@ -31,11 +31,12 @@ public class LUT {
             }
         }
     }
+
     //return specified table value
     public double getValue(int state, int action){
         return table[state][action];
     }
-
+    //set specified table value
     public void setValue(int state, int action, double QVal){
         table[state][action] = QVal;
     }
