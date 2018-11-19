@@ -1,4 +1,7 @@
 
+import java.io.*;
+import robocode.*;
+
 
 public class LUT {
 
@@ -68,5 +71,64 @@ public class LUT {
 
 
 
+
+    /**
+     * Will attempt to write only the 'visited' elements of the look up table
+     * to the specified file.
+     * Format is as follows
+     * 1st line is size of LUT
+     * nth line is index
+     * nth+1 line is Q-value for index on previous line
+     * @param argFile of type File.
+     */
+    void save( String argFile ) {
+        PrintStream saveFile = null;
+
+        try {
+            saveFile = new PrintStream( new RobocodeFileOutputStream( argFile ));
+        }
+        catch (IOException e) {
+            System.out.println( "*** Could not create output stream for LUT save file.");
+        }
+
+        saveFile.println( numStates );
+        int numEntriesSaved = 0;
+        for (int i=0; i<numStates; i++) {
+            for (int j = 0; j < numActions; j++) {
+                saveFile.println(table[i][j]);
+                numEntriesSaved++;
+            }
+        }
+        saveFile.close();
+        System.out.println ( "--+ Number of LUT table entries saved is " + numEntriesSaved );
+    }
+
+    /**
+     * Loads the LUT from file
+     * Expects that the 1st line match the maxIndex otherwise returns
+     */
+    public void load( String argFileName ) throws IOException {
+
+        FileInputStream inputFile = new FileInputStream(argFileName);
+        BufferedReader inputReader = new BufferedReader(new InputStreamReader(inputFile));
+
+        // Check that the maxIndex matches
+        int maxIndexFromFile = Integer.valueOf(inputReader.readLine());
+        if (maxIndexFromFile != numActions) {
+            System.out.println("*** MaxIndex for file does not match LUT.");
+            return;
+        }
+
+        // Now load the LUT
+        int numEntriesLoaded = 0;
+        for (int i = 0; i < numStates; i++) {
+            for (int j = 0; j < numActions; j++){
+            table[i][j] = Double.parseDouble(inputReader.readLine());
+            numEntriesLoaded++;
+            }
+        }
+        inputReader.close();
+        System.out.println ( "--+ Number of LUT entries loaded was " + numEntriesLoaded );
+    }
 
 }

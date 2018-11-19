@@ -36,6 +36,12 @@ public class NNBot extends AdvancedRobot{
         setAdjustGunForRobotTurn(true);
         setAdjustRadarForGunTurn(true);
 
+        //load data from saved file
+        try {
+            table.load("table.dat");
+        }catch(Exception e){
+            out.println("Unable to load file.");
+        }
 
 
 
@@ -166,21 +172,43 @@ public class NNBot extends AdvancedRobot{
         reward += -(4 * power + 2 * (power - 1));
         }
 
+
+
     public void onHitRobot(HitRobotEvent e) {
             out.println("Hit Robot: " + -6.0);
             reward += -6.0;
         }
 
+    public void onWin(WinEvent event)
+    {
+        try{
+            table.save("table.dat");
+        }
+        catch(Exception e){
+            out.println("Unable to save to file.");
+        }
+
+    }
+
+    public void onDeath(DeathEvent event)
+    {
+        try{
+            table.save("table.dat");
+        }
+        catch(Exception e){
+            out.println("Unable to save to file.");
+        }
+    }
 
         int getState(){
-            ScannedRobotEvent e; //TRY THIS
-            int direction = RobotStates.convertDirection(getHeading());
-            int enemyDist = (int)e.getDistance();
-            int enemyEnergy = (int)e.getEnergy();
-            int enemyBearing = (int)e.getBearing();
+            //ScannedRobotEvent e; //TRY THIS
+            //int direction = RobotStates.convertDirection(getHeading());
+            //int enemyDist = (int)e.getDistance();
+            //int enemyEnergy = (int)e.getEnergy();
+            //int enemyBearing = (int)e.getBearing();
             int hitW = hitWall;
             int hitByE = hitByEnemy;
-            int currState = RobotStates.state[direction][enemyDist][enemyEnergy][enemyBearing][hitW][hitByE]; //CHEKCK THIS
+            int currState = RobotStates.state[0][0][0][0][hitW][hitByE]; //CHEKCK THIS
             return currState;
     }
 
@@ -228,5 +256,9 @@ public class NNBot extends AdvancedRobot{
                 theta - getGunHeadingRadians()));
         fire(3); //alter firepower with distance?
     }
+
+
+
+
 
 }
